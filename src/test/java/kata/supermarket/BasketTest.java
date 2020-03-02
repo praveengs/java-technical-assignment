@@ -54,14 +54,16 @@ class BasketTest {
         return Arguments.of("items with discounts", createAllDiscountRules(), "7.08",
                 Arrays.asList(aPintOfMilk(), aPintOfMilk(),
                         aCake(), aCake(),
-                        aPackOfDigestives(), aPackOfDigestives(), aPackOfDigestives()
+                        aPackOfDigestives(), aPackOfDigestives(), aPackOfDigestives(),
+                        aKiloOfAmericanSweets().weighing(BigDecimal.ONE)
                 ));
     }
 
     private static List<DiscountRule> createAllDiscountRules() {
         return Arrays.asList(new BuyOneGetOneDiscountRule("Milk"),
                 new BuyTwoForOnePoundDiscountRule("Cake"),
-                new BuyThreeForPriceOfTwoDiscountRule("Digestive"));
+                new BuyThreeForPriceOfTwoDiscountRule("Digestive"),
+                new BuyOneKiloForHalfPrice("Sweets"));
     }
 
     private static Arguments multipleItemsPricedPerUnit() {

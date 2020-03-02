@@ -8,9 +8,11 @@ import java.util.List;
 
 public class Basket {
     private final List<Item> items;
+    private final DiscountCalculator discountCalculator;
 
-    public Basket() {
+    public Basket(final List<DiscountRule> discountRules) {
         this.items = new ArrayList<>();
+        this.discountCalculator = new DiscountCalculator(discountRules);
     }
 
     public void add(final Item item) {
@@ -39,15 +41,8 @@ public class Basket {
                     .setScale(2, RoundingMode.HALF_UP);
         }
 
-        /**
-         * TODO: This could be a good place to apply the results of
-         *  the discount calculations.
-         *  It is not likely to be the best place to do those calculations.
-         *  Think about how Basket could interact with something
-         *  which provides that functionality.
-         */
         private BigDecimal discounts() {
-            return BigDecimal.ZERO;
+            return discountCalculator.calculateDiscounts(this.items);
         }
 
         private BigDecimal calculate() {

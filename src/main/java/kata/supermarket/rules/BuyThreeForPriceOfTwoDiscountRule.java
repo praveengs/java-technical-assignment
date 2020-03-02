@@ -11,6 +11,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class BuyThreeForPriceOfTwoDiscountRule implements DiscountRule {
+    /**
+     * Product for which this rule is applicable for.
+     */
     private final String productId;
 
     public BuyThreeForPriceOfTwoDiscountRule(final String productId) {

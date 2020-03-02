@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class BuyTwoForOnePoundDiscountRule implements DiscountRule {
     /**
-     * item by unit on which there is a buy one get one discount.
+     * Product for which this rule is applicable for.
      */
     private final String productId;
 
@@ -23,13 +23,13 @@ public class BuyTwoForOnePoundDiscountRule implements DiscountRule {
     @Override
     public BigDecimal calculateDiscount(List<Item> items) {
         AtomicInteger counter = new AtomicInteger();
-        int chunkSize = 2;
+        int partitionSize = 2;
         return items.parallelStream()
                 .filter(item -> item instanceof ItemByUnit)
                 .filter(item -> item.product().productId().equals(this.productId))
-                .collect(Collectors.groupingBy(it -> counter.getAndIncrement() / chunkSize)).values()
+                .collect(Collectors.groupingBy(it -> counter.getAndIncrement() / partitionSize)).values()
                 .stream()
-                .filter(itemByUnits -> itemByUnits.size() == chunkSize)
+                .filter(itemByUnits -> itemByUnits.size() == partitionSize)
                 .map(itemByUnits -> BigDecimal.ONE.subtract(getSumOfPrices(itemByUnits)).abs())
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO)

@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 
 public class BuyOneKiloForHalfPrice implements DiscountRule {
 
+    /**
+     * Group for which this rule is applicable for.
+     */
     private final String group;
 
     public BuyOneKiloForHalfPrice(final String group) {

@@ -6,8 +6,8 @@ public class UnitProduct extends Product {
 
     private final BigDecimal pricePerUnit;
 
-    public UnitProduct(String productId, final BigDecimal pricePerUnit) {
-        super(productId);
+    public UnitProduct(String productId, String group, final BigDecimal pricePerUnit) {
+        super(productId, group);
         this.pricePerUnit = pricePerUnit;
     }
 

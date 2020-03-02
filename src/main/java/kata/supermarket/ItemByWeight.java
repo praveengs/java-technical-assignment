@@ -12,6 +12,11 @@ public class ItemByWeight implements Item {
         this.weightInKilos = weightInKilos;
     }
 
+    public BigDecimal getWeightInKilos() {
+        return weightInKilos;
+    }
+
+    @Override
     public BigDecimal price() {
         return product.pricePerKilo().multiply(weightInKilos).setScale(2, BigDecimal.ROUND_HALF_UP);
     }

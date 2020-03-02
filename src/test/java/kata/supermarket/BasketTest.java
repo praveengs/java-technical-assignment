@@ -1,6 +1,7 @@
 package kata.supermarket;
 
 import kata.supermarket.rules.BuyOneGetOneDiscountRule;
+import kata.supermarket.rules.BuyOneKiloForHalfPrice;
 import kata.supermarket.rules.BuyThreeForPriceOfTwoDiscountRule;
 import kata.supermarket.rules.BuyTwoForOnePoundDiscountRule;
 import org.junit.jupiter.api.DisplayName;
@@ -50,7 +51,7 @@ class BasketTest {
     }
 
     private static Arguments multipleItemsWithDiscount() {
-        return Arguments.of("items with discounts", createAllDiscountRules(), "4.59",
+        return Arguments.of("items with discounts", createAllDiscountRules(), "7.08",
                 Arrays.asList(aPintOfMilk(), aPintOfMilk(),
                         aCake(), aCake(),
                         aPackOfDigestives(), aPackOfDigestives(), aPackOfDigestives()
@@ -77,19 +78,19 @@ class BasketTest {
     }
 
     private static Item aPintOfMilk() {
-        return new UnitProduct("Milk", new BigDecimal("0.49")).oneOf();
+        return new UnitProduct("Milk", "Diary", new BigDecimal("0.49")).oneOf();
     }
 
     private static Item aCake() {
-        return new UnitProduct("Cake", new BigDecimal("2.50")).oneOf();
+        return new UnitProduct("Cake", "Bakery", new BigDecimal("2.50")).oneOf();
     }
 
     private static Item aPackOfDigestives() {
-        return new UnitProduct("Digestive", new BigDecimal("1.55")).oneOf();
+        return new UnitProduct("Digestive", "Biscuits", new BigDecimal("1.55")).oneOf();
     }
 
     private static WeighedProduct aKiloOfAmericanSweets() {
-        return new WeighedProduct("AmericanSweets", new BigDecimal("4.99"));
+        return new WeighedProduct("AmericanSweets", "Sweets", new BigDecimal("4.99"));
     }
 
     private static Item twoFiftyGramsOfAmericanSweets() {
@@ -97,7 +98,7 @@ class BasketTest {
     }
 
     private static WeighedProduct aKiloOfPickAndMix() {
-        return new WeighedProduct("PickAndMix", new BigDecimal("2.99"));
+        return new WeighedProduct("PickAndMix", "Sweets", new BigDecimal("2.99"));
     }
 
     private static Item twoHundredGramsOfPickAndMix() {

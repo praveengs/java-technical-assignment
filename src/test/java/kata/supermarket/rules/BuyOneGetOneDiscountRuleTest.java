@@ -41,7 +41,7 @@ public class BuyOneGetOneDiscountRuleTest {
     }
 
     private static Item aPintOfMilk() {
-        return new UnitProduct("Milk", new BigDecimal("0.49")).oneOf();
+        return new UnitProduct("Milk", "Diary", new BigDecimal("0.49")).oneOf();
     }
 
 }

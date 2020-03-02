@@ -42,6 +42,6 @@ public class BuyThreeForPriceOfTwoDiscountRuleTest {
     }
 
     private static Item aPintOfMilk() {
-        return new UnitProduct("Milk", new BigDecimal("0.65")).oneOf();
+        return new UnitProduct("Milk", "Diary", new BigDecimal("0.65")).oneOf();
     }
 }

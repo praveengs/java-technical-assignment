@@ -1,6 +1,7 @@
 package kata.supermarket;
 
 import kata.supermarket.rules.BuyOneGetOneDiscountRule;
+import kata.supermarket.rules.BuyTwoForOnePoundDiscountRule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -48,12 +49,15 @@ class BasketTest {
     }
 
     private static Arguments multipleItemsWithDiscount() {
-        return Arguments.of("items with discounts", createAllDiscountRules(), "0.49",
-                Arrays.asList(aPintOfMilk(), aPintOfMilk()));
+        return Arguments.of("items with discounts", createAllDiscountRules(), "1.49",
+                Arrays.asList(aPintOfMilk(), aPintOfMilk(),
+                       aCake(), aCake()
+                ));
     }
 
     private static List<DiscountRule> createAllDiscountRules() {
-        return Collections.singletonList(new BuyOneGetOneDiscountRule("Milk"));
+        return Arrays.asList(new BuyOneGetOneDiscountRule("Milk"),
+                new BuyTwoForOnePoundDiscountRule("Cake"));
     }
 
     private static Arguments multipleItemsPricedPerUnit() {
@@ -71,6 +75,10 @@ class BasketTest {
 
     private static Item aPintOfMilk() {
         return new UnitProduct("Milk", new BigDecimal("0.49")).oneOf();
+    }
+
+    private static Item aCake() {
+        return new UnitProduct("Cake", new BigDecimal("2.50")).oneOf();
     }
 
     private static Item aPackOfDigestives() {
